@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy World</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            text-align: center;
+        }
+
+        .container {
+            margin: 50px auto;
+            max-width: 600px;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .login-form,
+        .worlds,
+        .world-info {
+            display: none;
+        }
+
+        .worlds {
+            text-align: left;
+        }
+
+        .worlds button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .worlds button:hover {
+            background-color: #3700b3;
+        }
+
+        img {
+            width: 340px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .back {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .back:hover {
+            background-color: #3700b3;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Fantasy World</h1>
+        <div class="login-form">
+            <p>Please log in to explore the worlds:</p>
+            <input type="text" id="username" placeholder="Username">
+            <br><br>
+            <input type="password" id="password" placeholder="Password">
+            <br><br>
+            <button onclick="validateLogin()">Login</button>
+            <p id="error-message" class="error"></p>
+        </div>
+
+        <div class="worlds">
+            <h2>Select a World</h2>
+            <button onclick="loadWorld('gen_ai')">World Enhanced with Gen-AI</button>
+            <button onclick="loadWorld('no_gen_ai')">World Without Gen-AI</button>
+        </div>
+
+        <div class="world-info">
+            <h2 id="world-title"></h2>
+            <img id="world-image" src="" alt="World Image">
+            <p id="world-description"></p>
+            <button class="back" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <script>
+        const worlds = {
+            gen_ai: {
+                title: "World Enhanced with Gen-AI",
+                image: "./with ai.jpg", alt: "AI-Enhanced World",
+                description: "This world is a marvel of technology where Generative AI enhances every aspect of life. Skyscrapers glow with AI-driven lights, humans and robots coexist, and holographic projections display AI-generated art and information."
+            },
+            no_gen_ai: {
+                title: "World Without Gen-AI",
+                image: "./without ai.jpg", alt: "With out Gen AI",
+                description: "This world is untouched by advanced technology. Simple huts, traditional activities, and vast empty spaces define the way of life, offering a glimpse into a more primitive existence."
+            }
+        };
+
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            if (username === "Gowthami" && password === "598") {
+                errorMessage.textContent = "";
+                document.querySelector('.login-form').style.display = 'none';
+                document.querySelector('.worlds').style.display = 'block';
+            } else {
+                errorMessage.textContent = "Invalid username or password. Please try again.";
+            }
+        }
+
+        function loadWorld(world) {
+            document.querySelector('.worlds').style.display = 'none';
+            document.querySelector('.world-info').style.display = 'block';
+
+            document.getElementById('world-title').innerText = worlds[world].title;
+            document.getElementById('world-image').src = worlds[world].image;
+            document.getElementById('world-description').innerText = worlds[world].description;
+        }
+
+        function goBack() {
+            document.querySelector('.world-info').style.display = 'none';
+            document.querySelector('.worlds').style.display = 'block';
+        }
+
+        document.querySelector('.login-form').style.display = 'block';
+    </script>
+</body>
+
+</html>
